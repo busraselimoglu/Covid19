@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/navigation_statictics"
+            android:title="@string/statictics"
+            android:contentDescription="@string/app_name"
+            android:icon="@drawable/ic_statictics"/>
+
+    <item
+            android:id="@+id/navigation_assessment"
+            android:title="@string/assessment"
+            android:contentDescription="@string/app_name"
+            android:icon="@drawable/ic_asssessment"/>
+
+
+    <item
+            android:id="@+id/place"
+            android:title=""
+            android:contentDescription="@string/app_name"/>
+
+
+
+    <item
+            android:id="@+id/navigation_mainAction"
+            android:title="@string/main_action"
+            android:contentDescription="@string/app_name"
+            android:icon="@drawable/ic_main"/>
+
+    <item
+            android:id="@+id/navigation_setting"
+            android:title="@string/setting"
+            android:contentDescription="@string/app_name"
+            android:icon="@drawable/ic_settings"/>
+
+
+</menu>

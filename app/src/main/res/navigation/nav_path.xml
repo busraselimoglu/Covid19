@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_path"
+            app:startDestination="@id/homeFragment">
+
+    <fragment android:id="@+id/assessmentFragment"
+              android:name="com.example.covidd19.fragments.assessment.AssessmentFragment"
+              android:label="fragment_assessment"
+              tools:layout="@layout/fragment_assessment"/>
+
+    <fragment android:id="@+id/mainActionFragment"
+              android:name="com.example.covidd19.fragments.mainaction.MainActionFragment"
+              android:label="fragment_main_action"
+              tools:layout="@layout/fragment_main_action"/>
+
+    <fragment android:id="@+id/settingFragment"
+              android:name="com.example.covidd19.fragments.setting.SettingFragment"
+              android:label="fragment_setting"
+              tools:layout="@layout/fragment_setting"/>
+
+    <fragment android:id="@+id/statisticFragment"
+              android:name="com.example.covidd19.fragments.stactictic.StatisticFragment"
+              android:label="fragment_statictics"
+              tools:layout="@layout/fragment_statictics"/>
+
+    <fragment android:id="@+id/homeFragment"
+              android:name="com.example.covidd19.fragments.home.HomeFragment"
+              android:label="fragment_home"
+              tools:layout="@layout/fragment_home"/>
+</navigation>
