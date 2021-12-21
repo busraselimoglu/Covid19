@@ -29,4 +29,14 @@
               android:name="com.example.covidd19.fragments.home.HomeFragment"
               android:label="fragment_home"
               tools:layout="@layout/fragment_home"/>
+
+    <fragment android:id="@+id/appointment"
+              android:name="com.example.covidd19.fragments.home.Appointment"
+              android:label="fragment_appointment"
+              tools:layout="@layout/fragment_appointment"/>
+
+    <fragment android:id="@+id/makeHospitalAppointment"
+              android:name="com.example.covidd19.fragments.home.MakeHospitalAppointment"
+              android:label="fragment_make_hospital_appointment"
+              tools:layout="@layout/fragment_make_hospital_appointment"/>
 </navigation>
