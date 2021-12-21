@@ -1,14 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".fragments.setting.SettingFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_backgr"
+        tools:context=".fragments.setting.SettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+            android:id="@+id/settingTitle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Setting"/>
+            android:layout_height="wrap_content"
+            android:text="@string/general"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/_20ssp"
+            android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/generalCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-</FrameLayout>
+    <androidx.cardview.widget.CardView
+            android:id="@+id/generalCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_15sdp"
+            app:cardBackgroundColor="#44000000"
+            app:layout_constraintTop_toBottomOf="@+id/settingTitle"
+            app:layout_constraintBottom_toTopOf="@id/signOutTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/background_transparent"
+                android:padding="@dimen/_4sdp">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_transparent"
+                    android:text="@string/email"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:textSize="@dimen/_15ssp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/black"/>
+            <TextView
+                    android:id="@+id/settingEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_transparent"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:textSize="@dimen/_15ssp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/black"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+            android:id="@+id/signOutTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_out"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/_20ssp"
+            android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@id/generalCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/signOutCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_15sdp"
+            app:cardBackgroundColor="#44444444"
+            app:layout_constraintTop_toBottomOf="@+id/signOutTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                    android:id="@+id/signOutText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_out"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:background="@drawable/background_transparent"
+                    android:textSize="@dimen/_15ssp"
+                    android:layout_marginBottom="@dimen/_10ssp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/black"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,8 @@ object Constants {
     const val KEY_PASSWORD = "password"
     const val KEY_ID = "id"
     const val KEY_OTHER = "other"
+    const val KEY_USER_ID = "user_id"
+    const val KEY_FCM_TOKEN = "fcm_token"
 
     const val KEY_PREFERENCE_NAME = "videoMeetingPreference"
     const val KEY_IS_SIGNED_IN = "isSignedIn"
