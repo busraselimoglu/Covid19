@@ -1,16 +1,14 @@
 package com.example.covidd19.fragments.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.covidd19.R
 import com.example.covidd19.adapters.UsersAdapter
 import com.example.covidd19.databinding.FragmentAppointmentBinding
+import com.example.covidd19.listeners.UsersListener
 import com.example.covidd19.models.User
 import com.example.covidd19.utilities.Constants
 import com.example.covidd19.utilities.PreferenceManager
@@ -18,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.messaging.FirebaseMessaging
 
-class Appointment : Fragment() {
+class Appointment : Fragment(), UsersListener {
 
     private var _binding: FragmentAppointmentBinding? = null
     private val binding get() = _binding!!
@@ -28,10 +26,7 @@ class Appointment : Fragment() {
     private lateinit var usersAdapter: UsersAdapter
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         _binding = FragmentAppointmentBinding.inflate(inflater, container, false)
         return binding.root
@@ -51,9 +46,11 @@ class Appointment : Fragment() {
         }
 
         //Fragment is attached to a RecyclerView
-        usersAdapter = UsersAdapter(users)
+        usersAdapter = UsersAdapter(users,this)
         //binding.usersRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.usersRecyclerView.adapter = usersAdapter
+
+        binding.swipeRefreshLayout.setOnRefreshListener(this::getUsers)
 
         getUsers()
 
@@ -71,14 +68,16 @@ class Appointment : Fragment() {
     }
 
     private fun getUsers() {
-        binding.usersProgressBar.visibility = View.VISIBLE
+        binding.swipeRefreshLayout.isRefreshing = true
         val database = FirebaseFirestore.getInstance()
         database.collection(Constants.KEY_COLLECTION_USERS)
             .get().addOnCompleteListener {
-                binding.usersProgressBar.visibility = View.GONE
+                binding.swipeRefreshLayout.isRefreshing = false
                 val myUserId = preferenceManager.getString(Constants.KEY_USER_ID)
                 if (it.isSuccessful && it.result != null) {
-                    //here, I will display the user list except for the currently signed-in user,
+                    // Using swipe refresh layout, it can be called multiple times that's why I need to clear user list before adding new data
+                    users.clear()
+                    // Here, I will display the user list except for the currently signed-in user,
                     // because no one will have a meeting with himself. That's why I am excluding a signed-in user from the list
                     for (documentSnapshot: QueryDocumentSnapshot in it.result) {
                         if (myUserId.equals(documentSnapshot.id)) {
@@ -103,6 +102,22 @@ class Appointment : Fragment() {
                     binding.textErrorMessage.visibility = View.VISIBLE
                 }
             }
+    }
+
+    override fun initiateVideoMeeting(user: User) {
+        if (user.token == "null" || user.token.trim().isEmpty() ){
+            Toast.makeText(context, user.firstName + " " + user.lastName + " is not available for meeting", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(context, "Video meeting with " + user.firstName + " " + user.lastName, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun initiateAudioMeeting(user: User) {
+        if (user.token == "null" || user.token.trim().isEmpty() ){
+            Toast.makeText(context, user.firstName + " " + user.lastName + " is not available for meeting", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(context, "Audio meeting with " + user.firstName + " " + user.lastName, Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
