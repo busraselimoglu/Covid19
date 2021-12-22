@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
 open class ApiClient {
-    private var retrofit : Retrofit ?= null
+    private var retrofit : Retrofit?= null
 
     fun getClient() : Retrofit? {
         if (retrofit == null){
