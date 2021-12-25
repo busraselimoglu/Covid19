@@ -6,37 +6,37 @@
             app:startDestination="@id/homeFragment">
 
     <fragment android:id="@+id/assessmentFragment"
-              android:name="com.example.covidd19.fragments.assessment.AssessmentFragment"
+              android:name="com.example.covidd19.menu.assessment.AssessmentFragment"
               android:label="fragment_assessment"
               tools:layout="@layout/fragment_assessment"/>
 
     <fragment android:id="@+id/mainActionFragment"
-              android:name="com.example.covidd19.fragments.mainaction.MainActionFragment"
+              android:name="com.example.covidd19.menu.mainaction.MainActionFragment"
               android:label="fragment_main_action"
               tools:layout="@layout/fragment_main_action"/>
 
     <fragment android:id="@+id/settingFragment"
-              android:name="com.example.covidd19.fragments.setting.SettingFragment"
+              android:name="com.example.covidd19.menu.setting.SettingFragment"
               android:label="fragment_setting"
               tools:layout="@layout/fragment_setting"/>
 
     <fragment android:id="@+id/statisticFragment"
-              android:name="com.example.covidd19.fragments.stactictic.StatisticFragment"
+              android:name="com.example.covidd19.menu.stactictic.StatisticFragment"
               android:label="fragment_statictics"
               tools:layout="@layout/fragment_statictics"/>
 
     <fragment android:id="@+id/homeFragment"
-              android:name="com.example.covidd19.fragments.home.HomeFragment"
+              android:name="com.example.covidd19.menu.home.HomeFragment"
               android:label="fragment_home"
               tools:layout="@layout/fragment_home"/>
 
     <fragment android:id="@+id/appointment"
-              android:name="com.example.covidd19.fragments.home.Appointment"
+              android:name="com.example.covidd19.menu.home.Appointment"
               android:label="fragment_appointment"
               tools:layout="@layout/fragment_appointment"/>
 
     <fragment android:id="@+id/makeHospitalAppointment"
-              android:name="com.example.covidd19.fragments.home.MakeHospitalAppointment"
+              android:name="com.example.covidd19.menu.home.MakeHospitalAppointment"
               android:label="fragment_make_hospital_appointment"
               tools:layout="@layout/fragment_make_hospital_appointment"/>
 </navigation>

@@ -1,20 +1,15 @@
 package com.example.covidd19.activities
 
-import android.content.Context
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
 import android.util.Patterns
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.Navigation
 import com.example.covidd19.MainActivity
-import com.example.covidd19.R
-import com.example.covidd19.databinding.ActivitySignInBinding
 import com.example.covidd19.databinding.ActivitySignUpBinding
 import com.example.covidd19.utilities.Constants
 import com.example.covidd19.utilities.PreferenceManager
@@ -22,15 +17,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class SignUpActivity : AppCompatActivity() {
 
-    private var _binding: ActivitySignUpBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ActivitySignUpBinding
     private lateinit var preferenceManager: PreferenceManager
     private lateinit var selected: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding= ActivitySignUpBinding.inflate(layoutInflater)
+        binding= ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.textSignIn.setOnClickListener { onBackPressed() }
@@ -109,7 +103,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Error: " + it.message, Toast.LENGTH_SHORT).show()
             }
 
-
     }
+
 
 }

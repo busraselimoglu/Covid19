@@ -14,14 +14,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class SignInActivity : AppCompatActivity() {
 
-    private var _binding: ActivitySignInBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ActivitySignInBinding
     private lateinit var preferenceManager: PreferenceManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivitySignInBinding.inflate(layoutInflater)
+        binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.textSignUp.setOnClickListener {

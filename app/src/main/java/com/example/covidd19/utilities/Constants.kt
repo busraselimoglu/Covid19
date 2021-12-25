@@ -32,6 +32,12 @@ object Constants {
 
     const val REMOTE_MSG_MEETING_ROOM = "meeting_room"
 
+    const val KEY_COLLECTION_APPOINTMENT = "appointment"
+    const val KEY_DATE = "date"
+    const val KEY_DATE_28= "28.12.2021"
+    const val KEY_DATE_29= "29.12.2021"
+    const val KEY_DATE_30= "30.12.2021"
+
     fun getRemoteMessageHeaders(): HashMap<String, String> {
         val headers: HashMap<String, String> = HashMap()
         headers[REMOTE_MSG_AUTHORIZATION] = "key=AAAAhzP84-Y:APA91bE_DSH0CkqOz2hSP5OLeD2f6MGFr6XM2PFUDQ_ymGZMgaD0fF4tl6cssPcrYjkJZZ8LWFAHWXczd3ZhRx4NoMAc9uDXyK7k_xxxTdM8SmHCXOc3-tR1MEIwYNbJ5t3dHu5GsSfX"

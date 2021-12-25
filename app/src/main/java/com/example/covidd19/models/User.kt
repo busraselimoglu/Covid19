@@ -7,5 +7,7 @@ class User : Serializable {
     lateinit var lastName : String
     lateinit var email : String
     lateinit var token : String
+    lateinit var other : String
+    lateinit var id : String
 
 }

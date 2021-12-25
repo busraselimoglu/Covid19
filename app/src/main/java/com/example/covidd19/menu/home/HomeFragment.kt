@@ -1,4 +1,4 @@
-package com.example.covidd19.fragments.home
+package com.example.covidd19.menu.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

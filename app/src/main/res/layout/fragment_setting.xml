@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_backgr"
-        tools:context=".fragments.setting.SettingFragment">
+        tools:context=".menu.setting.SettingFragment">
 
     <TextView
             android:id="@+id/settingTitle"

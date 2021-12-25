@@ -1,4 +1,4 @@
-package com.example.covidd19.fragments.setting
+package com.example.covidd19.menu.setting
 
 import android.content.Intent
 import android.os.Bundle
