@@ -3,23 +3,19 @@ package com.example.covidd19.menu.assessment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.covidd19.MainActivity
 import com.example.covidd19.R
 import com.example.covidd19.databinding.FragmentRiskAssessmentBinding
-import com.example.covidd19.models.User
 import com.example.covidd19.utilities.Constants
 import com.example.covidd19.utilities.PreferenceManager
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.SetOptions
 
 
@@ -39,7 +35,6 @@ class RiskAssessment : Fragment() {
     private var riskScreen = 4
     private var dietScreen = 5
 
-    private lateinit var myId: String
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -80,10 +75,6 @@ class RiskAssessment : Fragment() {
 
         binding.nextButton.setOnClickListener {
             radioCheckControl(it)
-
-
-            val demo1Answer : RadioButton? = activity?.findViewById(binding.demo1Answer.checkedRadioButtonId) as? RadioButton
-            //println("e:::: "+ e.text)
         }
 
 
@@ -171,7 +162,6 @@ class RiskAssessment : Fragment() {
             } else{ Toast.makeText(context, "Answer all questions", Toast.LENGTH_SHORT).show() }
         } else if (mScreen == dietScreen){
             if(binding.diet1Answer.checkedRadioButtonId != -1 && binding.diet2Answer.checkedRadioButtonId != -1){
-                //getUsers()
                 recordFirebase()
                 Navigation.findNavController(view).navigate(R.id.action_riskAssessment_to_resultAssessment)
             } else{ Toast.makeText(context, "Answer all questions", Toast.LENGTH_SHORT).show() }
@@ -182,25 +172,10 @@ class RiskAssessment : Fragment() {
         val database: FirebaseFirestore = FirebaseFirestore.getInstance()
         val question: HashMap<String, Any> = HashMap()
 
+        val demo1Answer : RadioButton?  = activity?.findViewById(binding.demo1Answer.checkedRadioButtonId) as? RadioButton
+        if (demo1Answer != null) { question["1.demo1"] = demo1Answer.text }
 
-        //val demo1Answer : RadioButton?  = activity?.findViewById(binding.demo1Answer.checkedRadioButtonId) as? RadioButton
-        var x = ""
-        binding.demo1Answer.setOnCheckedChangeListener { group, checkedId ->
 
-            when(checkedId){
-                R.id.demo1A -> x = binding.demo1A.text.toString()
-                R.id.demo1B -> x = binding.demo1B.text.toString()
-                R.id.demo1C -> x = binding.demo1C.text.toString()
-                R.id.demo1D -> x = binding.demo1D.text.toString()
-                R.id.demo1E -> x = binding.demo1E.text.toString()
-                R.id.demo1F -> x = binding.demo1F.text.toString()
-            }
-            println("setOnCheckedChangeListener"+ x)
-        }
-
-        println(x)
-
-        //if (demo1Answer != null) { question["1.demo1Answer"] = demo1Answer.text }
         question["1.demo8feet"] = binding.demo8feet.text.toString()
         question["1.demo8inches"] = binding.demo8inches.text.toString()
         question["1.demo9Ibs"] = binding.demo9Ibs.text.toString()
@@ -217,9 +192,42 @@ class RiskAssessment : Fragment() {
         if (binding.pre4I.isChecked){ question["2.pre4I"] = binding.pre4I.text.toString() } else { question["2.pre4I"] = "null"}
         if (binding.pre4J.isChecked){ question["2.pre4J"] = binding.pre4J.text.toString() } else { question["2.pre4J"] = "null"}
         val pre5Answer : RadioButton?  = activity?.findViewById(binding.pre5Answer.checkedRadioButtonId) as? RadioButton
+        if (pre5Answer != null) { question["2.pre5"] = pre5Answer.text }
 
 
-        if (pre5Answer != null) { question["2.pre5Answer"] = pre5Answer.text }
+        if (binding.health7A.isChecked){ question["3.health7A"] = binding.health7Acancer.text.toString() }
+        else { question["3.health7B"]  = binding.health7B.text.toString()}
+
+        if (binding.health8A.isChecked){ question["3.health8A"] = binding.health8A.text.toString() }
+        else if (binding.health7A.isChecked){question["3.health8A"] = binding.health8Bquit.text.toString()}
+        else { question["3.health7B"]  = binding.health8C.text.toString()}
+
+        val medication1Answer : RadioButton?  = activity?.findViewById(binding.medication1Answer.checkedRadioButtonId) as? RadioButton
+        if (medication1Answer != null) { question["4.medication1"] = medication1Answer.text }
+
+        val medication2Answer : RadioButton?  = activity?.findViewById(binding.medication2Answer.checkedRadioButtonId) as? RadioButton
+        if (medication2Answer != null) { question["4.medication2"] = medication2Answer.text }
+
+        val medication3Answer : RadioButton?  = activity?.findViewById(binding.medication3Answer.checkedRadioButtonId) as? RadioButton
+        if (medication3Answer != null) { question["4.medication1"] = medication3Answer.text }
+
+        val medication4Answer : RadioButton?  = activity?.findViewById(binding.medication4Answer.checkedRadioButtonId) as? RadioButton
+        if (medication4Answer != null) { question["4.medication1"] = medication4Answer.text }
+
+
+        val risk1Answer : RadioButton?  = activity?.findViewById(binding.risk1Answer.checkedRadioButtonId) as? RadioButton
+        if (risk1Answer != null) { question["5.risk1"] = risk1Answer.text }
+
+        val risk2Answer : RadioButton?  = activity?.findViewById(binding.risk2Answer.checkedRadioButtonId) as? RadioButton
+        if (risk2Answer != null) { question["5.risk2"] = risk2Answer.text }
+
+
+        val diet1Answer : RadioButton?  = activity?.findViewById(binding.diet1Answer.checkedRadioButtonId) as? RadioButton
+        if (diet1Answer != null) { question["6.diet1"] = diet1Answer.text }
+
+        val diet2Answer : RadioButton?  = activity?.findViewById(binding.diet2Answer.checkedRadioButtonId) as? RadioButton
+        if (diet2Answer != null) { question["6.diet2"] = diet2Answer.text }
+
 
         preferenceManager.getString(Constants.KEY_USER_ID)?.let {
             database.collection("Risk Assessment")
@@ -231,8 +239,6 @@ class RiskAssessment : Fragment() {
                     startActivity(intent)
                 }
         }
-
-
     }
 
 }
