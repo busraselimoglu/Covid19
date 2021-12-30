@@ -33,28 +33,6 @@ class DoctorAppointment : Fragment() {
 
         preferenceManager = context?.let { PreferenceManager(it) }!!
 
-        example()
     }
-
-    private fun example() {
-        val database = FirebaseFirestore.getInstance()
-        database.collection("example")
-            .get()
-            .addOnCompleteListener {
-                val myUserId = preferenceManager.getString(Constants.KEY_USER_ID)
-                Log.d("bk", "DoctorAppointment/example/addOnComplete ::")
-                if (it.isSuccessful && it.result != null) {
-                    Log.d("bk", "DoctorAppointment/example/addOnComplete/isSuccessful ::")
-                    for (documentSnapshot: QueryDocumentSnapshot in it.result) {
-                        Log.d("bk", "DoctorAppointment/example/addOnComplete/isSuccessful/documentSnapshot ::")
-                        if (myUserId.equals(documentSnapshot.id)) {
-                            Log.d("bk", "DoctorAppointment/example/addOnComplete/isSuccessful/documentSnapshot/equals ::")
-                        }
-                    }
-                }
-
-            }
-    }
-
 
 }

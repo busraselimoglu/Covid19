@@ -274,13 +274,6 @@
                             android:textSize="@dimen/_12sdp"
                             android:fontFamily="@font/ubuntu_medium"
                             android:textColor="@color/colorTextDark"/>
-                    <RadioGroup
-                            android:id="@+id/pre4Answer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:paddingStart="@dimen/_12sdp"
-                            tools:ignore="RtlSymmetry">
                         <RadioButton
                                 android:id="@+id/pre4A"
                                 android:layout_width="match_parent"
@@ -371,7 +364,6 @@
                                 android:fontFamily="@font/ubuntu_medium"
                                 android:textColor="@color/colorTextDark"
                                 android:paddingEnd="@dimen/_15sdp"/>
-                    </RadioGroup>
                 </LinearLayout>
                 <LinearLayout
                         android:id="@+id/question5"
@@ -425,86 +417,6 @@
                     </RadioGroup>
                 </LinearLayout>
 
-                <LinearLayout
-                        android:id="@+id/question6"
-                        android:orientation="vertical"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:id="@+id/pre6"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/pre6"
-                            android:textSize="@dimen/_12sdp"
-                            android:fontFamily="@font/ubuntu_medium"
-                            android:textColor="@color/colorTextDark"/>
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                        <RadioGroup
-                                android:id="@+id/pre6Answer"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:paddingStart="@dimen/_12sdp"
-                                tools:ignore="RtlSymmetry">
-                            <RadioButton
-                                    android:id="@+id/pre6A"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/pre6A"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:fontFamily="@font/ubuntu_medium"
-                                    android:textColor="@color/colorTextDark"
-                                    android:paddingEnd="@dimen/_15sdp"/>
-                            <RadioButton
-                                    android:id="@+id/pre6B"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/pre6B"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:fontFamily="@font/ubuntu_medium"
-                                    android:textColor="@color/colorTextDark"
-                                    android:paddingEnd="@dimen/_15sdp"/>
-                        </RadioGroup>
-                        <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-                            <EditText
-                                    android:id="@+id/pre6Along"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:visibility="gone"
-                                    android:layout_marginEnd="@dimen/_65sdp"
-                                    android:layout_marginTop="@dimen/_5sdp"
-                                    android:hint="@string/for_how_long_in_days"
-                                    android:inputType="number"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:fontFamily="@font/ubuntu_medium"
-                                    android:textColor="@color/colorTextDark"/>
-                            <EditText
-                                    android:id="@+id/pre6Bsymptom"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:visibility="gone"
-                                    android:layout_marginEnd="@dimen/_65sdp"
-                                    android:layout_marginTop="@dimen/_12sdp"
-                                    android:hint="@string/for_how_long_did_your_symptoms_last"
-                                    android:inputType="number"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:fontFamily="@font/ubuntu_medium"
-                                    android:textColor="@color/colorTextDark"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
             </LinearLayout>
             <!-- Health Precondition -->
             <LinearLayout

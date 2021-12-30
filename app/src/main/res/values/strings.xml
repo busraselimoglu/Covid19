@@ -89,10 +89,6 @@
     <string name="pre5A">Tested negative</string>
     <string name="pre5B">Tested positive</string>
     <string name="pre5C">Never tested before</string>
-
-    <string name="pre6">6. If you tested positive were you hospitalized?</string>
-    <string name="pre6A">Yes</string>
-    <string name="pre6B">No</string>
     
 
     <string name="health7">7. Do you have cancer?</string>

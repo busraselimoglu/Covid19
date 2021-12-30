@@ -1,7 +1,9 @@
 package com.example.covidd19.menu.assessment
 
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +12,23 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.example.covidd19.MainActivity
 import com.example.covidd19.R
 import com.example.covidd19.databinding.FragmentRiskAssessmentBinding
+import com.example.covidd19.models.User
+import com.example.covidd19.utilities.Constants
+import com.example.covidd19.utilities.PreferenceManager
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.SetOptions
 
 
 class RiskAssessment : Fragment() {
 
     private var _binding : FragmentRiskAssessmentBinding?= null
     private val binding get() = _binding!!
+
+    private lateinit var preferenceManager: PreferenceManager
 
     private var mScreen = 0
 
@@ -27,6 +38,8 @@ class RiskAssessment : Fragment() {
     private var medicationScreen = 3
     private var riskScreen = 4
     private var dietScreen = 5
+
+    private lateinit var myId: String
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -38,6 +51,8 @@ class RiskAssessment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        preferenceManager = context?.let { PreferenceManager(it) }!!
 
         //Navigation
         binding.imageBackDemo.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_riskAssessment_to_assessmentFragment) }
@@ -62,42 +77,14 @@ class RiskAssessment : Fragment() {
             renderScreen()
         }
 
-        /*if(mScreen == previousScreen){
-            if (binding.pre6A.isChecked){
-                binding.pre6Along.visibility = View.VISIBLE
-                binding.pre6Bsymptom.visibility = View.GONE
-            }
-            if (binding.pre6B.isChecked) {
-                binding.pre6Bsymptom.visibility = View.VISIBLE
-                binding.pre6Along.visibility = View.GONE
-            }
-        }*/
 
         binding.nextButton.setOnClickListener {
             radioCheckControl(it)
-            //renderScreen()
 
 
-            val e : RadioButton  = activity?.findViewById(binding.demo1Answer.checkedRadioButtonId) as RadioButton
-            println("e:::: "+ e.text)
+            val demo1Answer : RadioButton? = activity?.findViewById(binding.demo1Answer.checkedRadioButtonId) as? RadioButton
+            //println("e:::: "+ e.text)
         }
-
-        /*binding.demo1Answer.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId){
-                R.id.demo1A -> Toast.makeText(context, "Checked: " + binding.demo1A.text, Toast.LENGTH_SHORT).show()
-                R.id.demo1B -> Toast.makeText(context, "Checked: " + checkedId, Toast.LENGTH_SHORT).show()
-                R.id.demo1C -> Toast.makeText(context, "Checked: " + checkedId, Toast.LENGTH_SHORT).show()
-                R.id.demo1D -> Toast.makeText(context, "Checked: " + checkedId, Toast.LENGTH_SHORT).show()
-                R.id.demo1E -> Toast.makeText(context, "Checked: " + checkedId, Toast.LENGTH_SHORT).show()
-                R.id.demo1F -> Toast.makeText(context, "Checked: " + checkedId, Toast.LENGTH_SHORT).show()
-            }
-        }*/
-
-        /*binding.demo1Answer.setOnCheckedChangeListener { group, checkedId ->
-            val radioButton : RadioButton  = activity?.findViewById(checkedId) as RadioButton
-            Toast.makeText(context, radioButton.text, Toast.LENGTH_SHORT).show()
-        }*/
-
 
 
         // Default screen
@@ -123,50 +110,52 @@ class RiskAssessment : Fragment() {
                 renderScreen()
             }else{ Toast.makeText(context, "Answer all questions", Toast.LENGTH_SHORT).show() }
         } else if(mScreen == previousScreen){
-            if (binding.pre6A.isChecked){
-                binding.pre6Along.visibility = View.VISIBLE
-                binding.pre6Bsymptom.visibility = View.GONE
-            }
-            if (binding.pre6B.isChecked) {
-                binding.pre6Bsymptom.visibility = View.VISIBLE
-                binding.pre6Along.visibility = View.GONE
-            }
-            if(binding.pre4Answer.checkedRadioButtonId != -1 && binding.pre5Answer.checkedRadioButtonId != -1 &&
-                (binding.pre6Along.text.toString().trim().isNotEmpty() || binding.pre6Bsymptom.text.toString().trim().isNotEmpty()) ){
+            if((binding.pre4A.isChecked || binding.pre4B.isChecked || binding.pre4C.isChecked ||
+                        binding.pre4D.isChecked || binding.pre4E.isChecked || binding.pre4F.isChecked ||
+                        binding.pre4G.isChecked || binding.pre4H.isChecked || binding.pre4I.isChecked ||
+                        binding.pre4J.isChecked ) && binding.pre5Answer.checkedRadioButtonId != -1 ){
                 mScreen = healthScreen
                 renderScreen()
             }else{ Toast.makeText(context, "Answer all questions", Toast.LENGTH_SHORT).show() }
         } else if (mScreen == healthScreen) {
-            /*if (binding.health7A.isChecked) binding.health7Acancer.visibility = View.VISIBLE
-            if (binding.health7B.isChecked) binding.health7Acancer.visibility = View.GONE
-            if (binding.health8B.isChecked) binding.health8Bquit.visibility = View.VISIBLE
-            if (binding.health8A.isChecked || binding.health8C.isChecked) binding.health8Bquit.visibility = View.GONE*/
             if (binding.health7Answer.checkedRadioButtonId != -1 && binding.health8Answer.checkedRadioButtonId != -1){
-                if (binding.health7A.isChecked){
-                    binding.health7Acancer.visibility = View.VISIBLE
-                    if (binding.health7Acancer.text.toString().trim().isNotEmpty()){
+                if(binding.health7A.isChecked && (binding.health8A.isChecked || binding.health8C.isChecked)){
+                    if(binding.health7Acancer.text.toString().trim().isNotEmpty()){
                         mScreen = medicationScreen
                         renderScreen()
-                    } else Toast.makeText(context, "Answer cancer questions", Toast.LENGTH_SHORT).show()
-                } else if (binding.health7B.isChecked){
+                    }else{
+                        binding.health7Acancer.visibility = View.VISIBLE
+                        binding.health8Bquit.visibility = View.GONE
+                        Toast.makeText(context, "Answer all questions", Toast.LENGTH_SHORT).show()
+                    }
+
+                }else if (binding.health7B.isChecked && binding.health8B.isChecked){
+                    if (binding.health8Bquit.text.toString().trim().isNotEmpty()){
+                        mScreen = medicationScreen
+                        renderScreen()
+                    }else{
+                        binding.health7Acancer.visibility = View.GONE
+                        binding.health8Bquit.visibility = View.VISIBLE
+                        Toast.makeText(context, "Answer all questions", Toast.LENGTH_SHORT).show()
+                    }
+
+                }else if(binding.health7A.isChecked && binding.health8B.isChecked){
+                    if (binding.health7Acancer.text.toString().trim().isNotEmpty() && binding.health8Bquit.text.toString().trim().isNotEmpty()){
+                        mScreen = medicationScreen
+                        renderScreen()
+                    }else{
+                        Toast.makeText(context, "Answer all questions", Toast.LENGTH_SHORT).show()
+                        binding.health7Acancer.visibility = View.VISIBLE
+                        binding.health8Bquit.visibility = View.VISIBLE
+                    }
+
+                }else if( binding.health7B.isChecked && (binding.health8A.isChecked || binding.health8C.isChecked)){
                     binding.health7Acancer.visibility = View.GONE
+                    binding.health8Bquit.visibility = View.GONE
                     mScreen = medicationScreen
                     renderScreen()
                 }
 
-                if (binding.health8B.isChecked){
-                    binding.health8Bquit.visibility = View.VISIBLE
-                    if (binding.health8Bquit.text.toString().trim().isNotEmpty()){
-                        mScreen = medicationScreen
-                        renderScreen()
-                    } else{
-                        Toast.makeText(context, "Answer quit questions", Toast.LENGTH_SHORT).show()
-                    }
-                } else if (binding.health8A.isChecked || binding.health8C.isChecked){
-                    binding.health7Acancer.visibility = View.GONE
-                    mScreen = medicationScreen
-                    renderScreen()
-                }
 
             } else{ Toast.makeText(context, "Answer all questions", Toast.LENGTH_SHORT).show() }
         } else if (mScreen == medicationScreen){
@@ -182,9 +171,68 @@ class RiskAssessment : Fragment() {
             } else{ Toast.makeText(context, "Answer all questions", Toast.LENGTH_SHORT).show() }
         } else if (mScreen == dietScreen){
             if(binding.diet1Answer.checkedRadioButtonId != -1 && binding.diet2Answer.checkedRadioButtonId != -1){
+                //getUsers()
+                recordFirebase()
                 Navigation.findNavController(view).navigate(R.id.action_riskAssessment_to_resultAssessment)
             } else{ Toast.makeText(context, "Answer all questions", Toast.LENGTH_SHORT).show() }
         }
+    }
+
+    private fun recordFirebase(){
+        val database: FirebaseFirestore = FirebaseFirestore.getInstance()
+        val question: HashMap<String, Any> = HashMap()
+
+
+        //val demo1Answer : RadioButton?  = activity?.findViewById(binding.demo1Answer.checkedRadioButtonId) as? RadioButton
+        var x = ""
+        binding.demo1Answer.setOnCheckedChangeListener { group, checkedId ->
+
+            when(checkedId){
+                R.id.demo1A -> x = binding.demo1A.text.toString()
+                R.id.demo1B -> x = binding.demo1B.text.toString()
+                R.id.demo1C -> x = binding.demo1C.text.toString()
+                R.id.demo1D -> x = binding.demo1D.text.toString()
+                R.id.demo1E -> x = binding.demo1E.text.toString()
+                R.id.demo1F -> x = binding.demo1F.text.toString()
+            }
+            println("setOnCheckedChangeListener"+ x)
+        }
+
+        println(x)
+
+        //if (demo1Answer != null) { question["1.demo1Answer"] = demo1Answer.text }
+        question["1.demo8feet"] = binding.demo8feet.text.toString()
+        question["1.demo8inches"] = binding.demo8inches.text.toString()
+        question["1.demo9Ibs"] = binding.demo9Ibs.text.toString()
+        question["1.demo10size"] = binding.demo10size.text.toString()
+
+        if (binding.pre4A.isChecked){ question["2.pre4A"] = binding.pre4A.text.toString() } else { question["2.pre4A"]  = "null"}
+        if (binding.pre4B.isChecked){ question["2.pre4B"] = binding.pre4B.text.toString() } else { question["2.pre4B"] = "null"}
+        if (binding.pre4C.isChecked){ question["2.pre4C"] = binding.pre4C.text.toString() } else { question["2.pre4C"] = "null"}
+        if (binding.pre4D.isChecked){ question["2.pre4D"] = binding.pre4D.text.toString() } else { question["2.pre4D"] = "null"}
+        if (binding.pre4E.isChecked){ question["2.pre4E"] = binding.pre4E.text.toString() } else { question["2.pre4E"] = "null"}
+        if (binding.pre4F.isChecked){ question["2.pre4F"] = binding.pre4F.text.toString() } else { question["2.pre4F"] = "null"}
+        if (binding.pre4G.isChecked){ question["2.pre4G"] = binding.pre4G.text.toString() } else { question["2.pre4G"] = "null"}
+        if (binding.pre4H.isChecked){ question["2.pre4H"] = binding.pre4H.text.toString() } else { question["2.pre4H"] = "null"}
+        if (binding.pre4I.isChecked){ question["2.pre4I"] = binding.pre4I.text.toString() } else { question["2.pre4I"] = "null"}
+        if (binding.pre4J.isChecked){ question["2.pre4J"] = binding.pre4J.text.toString() } else { question["2.pre4J"] = "null"}
+        val pre5Answer : RadioButton?  = activity?.findViewById(binding.pre5Answer.checkedRadioButtonId) as? RadioButton
+
+
+        if (pre5Answer != null) { question["2.pre5Answer"] = pre5Answer.text }
+
+        preferenceManager.getString(Constants.KEY_USER_ID)?.let {
+            database.collection("Risk Assessment")
+                .document(it)
+                .set(question, SetOptions.merge())
+                .addOnSuccessListener {
+                    val intent = Intent(activity, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
+                }
+        }
+
+
     }
 
 }
