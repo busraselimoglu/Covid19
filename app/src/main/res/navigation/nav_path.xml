@@ -8,7 +8,9 @@
     <fragment android:id="@+id/assessmentFragment"
               android:name="com.example.covidd19.menu.assessment.AssessmentFragment"
               android:label="fragment_assessment"
-              tools:layout="@layout/fragment_assessment"/>
+              tools:layout="@layout/fragment_assessment">
+        <action android:id="@+id/action_assessmentFragment_to_riskAssessment" app:destination="@id/riskAssessment"/>
+    </fragment>
 
     <fragment android:id="@+id/mainActionFragment"
               android:name="com.example.covidd19.menu.mainaction.MainActionFragment"
@@ -39,4 +41,11 @@
               android:name="com.example.covidd19.menu.home.MakeHospitalAppointment"
               android:label="fragment_make_hospital_appointment"
               tools:layout="@layout/fragment_make_hospital_appointment"/>
+    <fragment android:id="@+id/riskAssessment" android:name="com.example.covidd19.menu.assessment.RiskAssessment"
+              android:label="fragment_risk_assessment" tools:layout="@layout/fragment_risk_assessment">
+        <action android:id="@+id/action_riskAssessment_to_assessmentFragment" app:destination="@id/assessmentFragment"/>
+        <action android:id="@+id/action_riskAssessment_to_resultAssessment" app:destination="@id/resultAssessment"/>
+    </fragment>
+    <fragment android:id="@+id/resultAssessment" android:name="com.example.covidd19.menu.assessment.ResultAssessment"
+              android:label="fragment_result_assessment" tools:layout="@layout/fragment_result_assessment"/>
 </navigation>

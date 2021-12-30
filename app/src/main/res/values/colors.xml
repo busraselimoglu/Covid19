@@ -21,4 +21,6 @@
     <color name="colorHintText">#BDBDBD</color>
     <color name="colorMeetingInvitationStart">#4004BB</color>
     <color name="colorMeetingInvitationEnd">#8A1AAA</color>
+
+    <color name="colorTextDark">#D7000000</color>
 </resources>

@@ -48,6 +48,113 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="risk_assessment">Risk Assessment</string>
+    <string name="demographics_title">Demographics</string>
 
+    <string name="demo1">1. What is your age?</string>
+    <string name="demo1A">0 to 17</string>
+    <string name="demo1B">18 to 24</string>
+    <string name="demo1C">25 to 35</string>
+    <string name="demo1D">36 to 50</string>
+    <string name="demo1E">51 to 64</string>
+    <string name="demo1F">65+</string>
+
+
+    <string name="demo8">8. Height:</string>
+
+    <string name="demo9">9. Weight</string>
+
+    <string name="demo10">10. Household Size:</string>
+    <string name="feet">feet</string>
+    <string name="inches">inches</string>
+    <string name="ibs">Ibs</string>
+    <string name="size">size</string>
+    <string name="next_page">Next Page</string>
+    <string name="previous_exposure_title">Previous Exposure</string>
+    <string name="health_precondition_title">Health Precondition</string>
+
+    <string name="pre4">4. Have you had any of symptoms below after March 2020?</string>
+    <string name="pre4A">Shortness of breath or difficulty breathing</string>
+    <string name="pre4B">Fatigue</string>
+    <string name="pre4C">Muscle or body aches</string>
+    <string name="pre4D">Sore throat</string>
+    <string name="pre4E">Loss of smell</string>
+    <string name="pre4F">Loss of taste</string>
+    <string name="pre4G">Congestion or runny nose</string>
+    <string name="pre4H">Nausea or vomiting</string>
+    <string name="pre4I">Diarrhea</string>
+    <string name="pre4J">None</string>
+
+    <string name="pre5">5. Have you been tested for COVID?</string>
+    <string name="pre5A">Tested negative</string>
+    <string name="pre5B">Tested positive</string>
+    <string name="pre5C">Never tested before</string>
+
+    <string name="pre6">6. If you tested positive were you hospitalized?</string>
+    <string name="pre6A">Yes</string>
+    <string name="pre6B">No</string>
+    
+
+    <string name="health7">7. Do you have cancer?</string>
+    <string name="health7A">Yes</string>
+    <string name="health7B">No</string>
+
+    <string name="health8">8. Do you smoke?</string>
+    <string name="health8A">Never</string>
+    <string name="health8B">Not currently</string>
+    <string name="health8C">Yes</string>
+
+    <string name="enter_cancer_type">Enter cancer type</string>
+    <string name="quit_years">Quit years</string>
+
+    <string name="for_how_long_in_days">For how long in days</string>
+    <string name="for_how_long_did_your_symptoms_last">For how long did your symptoms last?</string>
+
+    <string name="medication1">1. Do you take Immunosuppressants?</string>
+    <string name="medication1A">Yes</string>
+    <string name="medication1B">No</string>
+
+    <string name="medication2">2. Do you take blood pressure medications?</string>
+    <string name="medication2A">Yes</string>
+    <string name="medication2B">No</string>
+
+    <string name="medication3">3. Do you take vitamins medications?</string>
+    <string name="medication3A">Yes</string>
+    <string name="medication3B">No</string>
+
+    <string name="medication4">4. Do you take any supplements?</string>
+    <string name="medication4A">Yes</string>
+    <string name="medication4B">No</string>
+
+    <string name="medications_amp_supplements_title"><![CDATA[Medications & Supplements]]></string>
+
+    <string name="risk1">1. How often do you wear mask?</string>
+    <string name="risk1A">I don’t wear mask</string>
+    <string name="risk1B">I wear mask only if required in environments</string>
+    <string name="risk1C">I wear mask both if required and anytime interacting with people</string>
+
+    <string name="risk2">2. How careful you are when wearing mask?</string>
+    <string name="risk2A">When I wear the mask, I completely cover my mouth and nose, and never touch it until I take it
+        off when I am back at home
+    </string>
+    <string name="risk2B">Sometimes I may pull the mask below my nose (intentionally or unintentionally)</string>
+    <string name="risk2C">Sometimes I may pull the mask below my chin (intentionally or unintentionally)</string>
+    <string name="risk2D">I don’t wear mask</string>
+
+    <string name="risk_reduction_title">Risk Reduction</string>
+
+    <string name="diet_title">After March 2020, how your LifeStyle and Diet has been changed?</string>
+
+    <string name="diet1">1. Weight change?</string>
+    <string name="diet1A">No change</string>
+    <string name="diet1B">Increased</string>
+    <string name="diet1C">Decreased</string>
+
+    <string name="diet2">2. Diet?</string>
+    <string name="diet2A">No change</string>
+    <string name="diet2B">Increased</string>
+    <string name="diet2C">Decreased</string>
+    <string name="diet_amp_lifestyle_title"><![CDATA[Diet & LifeStyle]]></string>
+    <string name="result">Result</string>
 
 </resources>

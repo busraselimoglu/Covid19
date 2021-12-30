@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".menu.assessment.AssessmentFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_backgr"
+        tools:context=".menu.assessment.AssessmentFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="ASSESSMENT"/>
+    <LinearLayout
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:orientation="vertical"
+            android:background="@drawable/button_risk"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="36dp"
+            app:layout_constraintHorizontal_bias="0.497">
 
-</FrameLayout>
+        <ImageView
+                android:id="@+id/riskIcon"
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+                android:layout_weight="5"
+                android:src="@drawable/ic_asssessment"
+                android:contentDescription="@string/app_name"
+        />
+
+        <TextView
+                android:id="@+id/riskTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/risk_assessment"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/ubuntu_bold"
+                android:textSize="@dimen/_13sdp"
+                android:textColor="@color/colorTextIcons"
+        />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

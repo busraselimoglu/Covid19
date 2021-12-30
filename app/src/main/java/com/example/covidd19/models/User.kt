@@ -9,5 +9,7 @@ class User : Serializable {
     lateinit var token : String
     lateinit var other : String
     lateinit var id : String
+    lateinit var date : String
+    lateinit var clock : String
 
 }

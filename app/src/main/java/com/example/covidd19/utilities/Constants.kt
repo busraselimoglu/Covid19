@@ -34,9 +34,8 @@ object Constants {
 
     const val KEY_COLLECTION_APPOINTMENT = "appointment"
     const val KEY_DATE = "date"
-    const val KEY_DATE_28= "28.12.2021"
-    const val KEY_DATE_29= "29.12.2021"
-    const val KEY_DATE_30= "30.12.2021"
+    const val KEY_CLOCK= "clock"
+
 
     fun getRemoteMessageHeaders(): HashMap<String, String> {
         val headers: HashMap<String, String> = HashMap()
