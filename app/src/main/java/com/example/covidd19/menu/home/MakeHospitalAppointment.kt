@@ -1,5 +1,6 @@
 package com.example.covidd19.menu.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +14,6 @@ import com.example.covidd19.listeners.AppointmentInterface
 import com.example.covidd19.models.User
 import com.example.covidd19.utilities.Constants
 import com.example.covidd19.utilities.PreferenceManager
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
 
@@ -46,11 +46,10 @@ class MakeHospitalAppointment : Fragment(), AppointmentInterface {
 
         getUsers()
 
-
-        example()
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun getUsers() {
         binding.swipeRefreshLayout.isRefreshing = true
         val database = FirebaseFirestore.getInstance()
@@ -96,33 +95,6 @@ class MakeHospitalAppointment : Fragment(), AppointmentInterface {
             }
     }
 
-
-    private fun example() {
-        val database = FirebaseFirestore.getInstance()
-        /*database.collection("example")
-            .get()
-            .addOnCompleteListener {
-                val myUserId = preferenceManager.getString(Constants.KEY_USER_ID)
-                Log.d("bk", "MakeHospitalAppointment/example/addOnComplete ::")
-                if (it.isSuccessful && it.result != null) {
-                    Log.d("bk", "MakeHospitalAppointment/example/addOnComplete/isSuccessful ::")
-                    for (documentSnapshot: QueryDocumentSnapshot in it.result) {
-                        Log.d("bk", "MakeHospitalAppointment/example/addOnComplete/isSuccessful/documentSnapshot ::")
-                        if (myUserId.equals(documentSnapshot.id)) {
-                            Log.d("bk", "MakeHospitalAppointment/example/addOnComplete/isSuccessful/documentSnapshot/equals ::")
-                        }
-                    }
-                }
-
-            }*/
-
-        //.collection("Dec 24, 2021")
-        /*val collections : Iterable<CollectionReference> =
-            listOf(database.collection("example").document("54123674123").collection("Dec 24, 2021"))
-        for (collRef: CollectionReference in collections){
-            Log.d("bk","Found subcollection with id: "+collRef.id)
-        }*/
-    }
 
     override fun appointmentDate(user: User) {
         val intent = Intent(activity!!.applicationContext, DateSelect::class.java)

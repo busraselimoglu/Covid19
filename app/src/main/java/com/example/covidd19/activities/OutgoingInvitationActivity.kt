@@ -29,7 +29,6 @@ import java.util.*
 class OutgoingInvitationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOutgoingInvitationBinding
-    //private val binding get() = _binding!!
 
     private lateinit var preferenceManager: PreferenceManager
     private var inviterToken: String? = null

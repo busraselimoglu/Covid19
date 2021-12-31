@@ -74,7 +74,6 @@ class DateSelect : AppCompatActivity() {
                 Toast.makeText(this, "Select Clock", Toast.LENGTH_SHORT).show()
             } else {
                 getUsers()
-                //getAppointment()
             }
         }
 
@@ -84,7 +83,6 @@ class DateSelect : AppCompatActivity() {
 
     private fun signAppointment(users: HashMap<String, Any>) {
         val database: FirebaseFirestore = FirebaseFirestore.getInstance()
-
 
         database.collection(Constants.KEY_COLLECTION_APPOINTMENT)
             .document(message.toString())
@@ -99,32 +97,6 @@ class DateSelect : AppCompatActivity() {
 
     }
 
-    /*private fun signExample(users: HashMap<String, Any>) {
-        val database: FirebaseFirestore = FirebaseFirestore.getInstance()
-
-        /*
-        * .document(message.toString())
-            .collection(binding.textView.text.toString())
-            .document(binding.textViewClock.text.toString())
-            .collection(message.toString())*/
-
-        database.collection("example").document()
-            .collection(binding.textView.text.toString())
-            .add(users)
-            .addOnSuccessListener {
-                Log.d("bk", "signExample/addOnSuccessListener: ")
-                preferenceManager.putString(Constants.KEY_ID,message.toString())
-                preferenceManager.putString(Constants.KEY_DATE, binding.textView.text.toString())
-                preferenceManager.putString(Constants.KEY_CLOCK, binding.textViewClock.text.toString())
-
-                val intent = Intent(applicationContext, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                startActivity(intent)
-            }
-            .addOnFailureListener {
-                Log.d("bk", "signExample/addOnFailureListener: " + it.message)
-            }
-    }*/
 
     private fun getUsers() {
         val database = FirebaseFirestore.getInstance()
@@ -144,30 +116,10 @@ class DateSelect : AppCompatActivity() {
                     }
                     if (userHash.size > 0 ) {
                         signAppointment(userHash)
-                        //signExample(userHash)
                     }
                 }
             }
     }
-
-    /*private fun getAppointment(){
-        val database = FirebaseFirestore.getInstance()
-
-        database.collection("example").document()
-            .collection(binding.textView.text.toString())
-            .get()
-            .addOnCompleteListener {
-                val myUserId = preferenceManager.getString(Constants.KEY_USER_ID)
-                Log.d("bk","DateSelect/getAppointment/addOnComplete")
-                if (it.isSuccessful && it.result != null){
-                    Log.d("bk","DateSelect/getAppointment/addOnComplete/isSuccessful")
-                    for (documentSnapshot: QueryDocumentSnapshot in it.result){
-                        Log.d("bk","DateSelect/getAppointment/addOnComplete/isSuccessful/documentSnapshot")
-                    }
-                }
-            }
-            .addOnFailureListener {  }
-    }*/
 
 }
 

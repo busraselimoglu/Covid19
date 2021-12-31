@@ -229,8 +229,8 @@ class RiskAssessment : Fragment() {
         if (diet2Answer != null) { question["6.diet2"] = diet2Answer.text }
 
 
-        preferenceManager.getString(Constants.KEY_USER_ID)?.let {
-            database.collection("Risk Assessment")
+        preferenceManager.getString(Constants.KEY_ID)?.let {
+            database.collection("RiskAssessment")
                 .document(it)
                 .set(question, SetOptions.merge())
                 .addOnSuccessListener {

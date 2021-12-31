@@ -1,18 +1,12 @@
 package com.example.covidd19.menu.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.covidd19.R
 import com.example.covidd19.databinding.FragmentDoctorAppointmentBinding
-import com.example.covidd19.databinding.FragmentMakeHospitalAppointmentBinding
-import com.example.covidd19.utilities.Constants
 import com.example.covidd19.utilities.PreferenceManager
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
 
 
 class DoctorAppointment : Fragment() {

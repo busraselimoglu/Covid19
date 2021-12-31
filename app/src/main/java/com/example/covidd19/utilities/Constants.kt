@@ -33,8 +33,6 @@ object Constants {
     const val REMOTE_MSG_MEETING_ROOM = "meeting_room"
 
     const val KEY_COLLECTION_APPOINTMENT = "appointment"
-    const val KEY_DATE = "date"
-    const val KEY_CLOCK= "clock"
 
 
     fun getRemoteMessageHeaders(): HashMap<String, String> {

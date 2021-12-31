@@ -1,5 +1,6 @@
 package com.example.covidd19.menu.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -49,7 +50,6 @@ class Appointment : Fragment(), UsersListener {
 
         //Fragment is attached to a RecyclerView
         usersAdapter = UsersAdapter(users,this)
-        //binding.usersRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.usersRecyclerView.adapter = usersAdapter
 
         binding.swipeRefreshLayout.setOnRefreshListener(this::getUsers)
@@ -69,6 +69,7 @@ class Appointment : Fragment(), UsersListener {
             }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun getUsers() {
         binding.swipeRefreshLayout.isRefreshing = true
         val database = FirebaseFirestore.getInstance()
